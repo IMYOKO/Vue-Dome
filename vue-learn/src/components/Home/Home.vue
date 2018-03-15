@@ -1,6 +1,5 @@
 <template>
   <div id="home">
-    <p>{{$store.state.isLogin}}</p>
     <!-- 立即购买 -->
     <!--购买-->
     <div class="buy-wrapper">
