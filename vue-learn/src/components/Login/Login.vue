@@ -14,7 +14,7 @@
       </ul>
       <div class="sumbit-box">
         <input type="button" class="button login-button" @click="login()" value="登录" />
-        <input type="button" class="button registed-button mt15" value="注册" />
+        <input type="button" class="button registed-button mt15" @click="registed()" value="注册" />
       </div>
     </div>
   </div>
@@ -45,6 +45,11 @@ export default {
     // 判断手机号码
     isPhoneNum(num){
       return /^0?1[3|4|5|7|8][0-9]\d{8}$/.test(num);
+    },
+
+    // 注册跳转
+    registed() {
+      this.$router.push({ name:'registed' })
     }
   },
   store
