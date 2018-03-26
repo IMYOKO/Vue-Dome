@@ -6,7 +6,7 @@
     <div class="login-form-wrapper">
       <ul class="login-form-list">
         <li class="input-row">
-          <input type="text" v-model="user" placeholder="用户名/手机号" />
+          <input type="text" v-model="user" placeholder="用户名/手机号" @keyup="isPhoneNumFn()" />
         </li>
         <li class="input-row">
           <input type="password" v-model="passWord" placeholder="密码" />
@@ -41,6 +41,14 @@ export default {
         return false;
       }
       console.log('登录')
+    },
+    isPhoneNumFn() {
+      if(!this.isPhoneNum(this.user)){
+        console.log('手机号码不正确');
+        return false;
+      }else{
+        console.log('正确');
+      }
     },
     // 判断手机号码
     isPhoneNum(num){
