@@ -1,12 +1,17 @@
 <template>
-  <div id="app">
+  <div id="app" @click="aaa">
     <router-view/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  methods: {
+    aaa() {
+      // console.log('aaa')
+    }
+  }
 }
 </script>
 

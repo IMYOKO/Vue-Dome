@@ -19,6 +19,19 @@ export default {
       isLogin: null
     }
   },
+  created () {
+    this.isLogin = this.$store.state.isLogin;
+  },
+  mounted () {
+    console.log(this.isLogin);
+    // this.isLogin = this.$store.state.isLogin;
+    console.log(this.isLogin);
+    if(sessionStorage.login){
+      console.log('登录没？ '+sessionStorage.login)
+    }else{
+      console.log('sessionStorage.login')
+    }
+  },
   methods: {
     buy() {
       this.isLogin = this.$store.state.isLogin;

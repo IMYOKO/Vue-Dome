@@ -9,11 +9,20 @@
           <input type="text" v-model="user" placeholder="用户名/手机号" @keyup="isPhoneNumFn()" />
         </li>
         <li class="input-row">
+          {{email}}
+          <input type="text" :value='email' placeholder="邮箱号码" @input='updataEmail' />
+        </li>
+        <li class="input-row">
+          {{numbers}}
+          <input type="text" :value='number' placeholder="输入数量" @input='updataNumber' />
+        </li>
+        <li class="input-row">
           <input type="password" v-model="passWord" placeholder="密码" />
         </li>
       </ul>
+      {{loginStatus}}
       <div class="sumbit-box">
-        <input type="button" class="button login-button" @click="login()" value="登录" />
+        <input type="button" class="button login-button" @click="getLogin" value="登录" />
         <input type="button" class="button registed-button mt15" @click="registed()" value="注册" />
       </div>
     </div>
@@ -22,6 +31,7 @@
 
 <script>
 import store from "@/vuex/store"
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
   data() {
     return {
@@ -30,7 +40,26 @@ export default {
       passWord: ''
     }
   },
+  mounted () {
+    this.GET_LOGIN_STATE();
+  },
+  computed: {
+    ...mapState(['loginStatus','email', 'number']),
+    ...mapGetters(['numbers'])
+  },
   methods: {
+    ...mapMutations([
+      'GET_LOGIN_STATE'
+    ]),
+    ...mapActions([
+      'getLogin'
+    ]),
+    updataEmail(e) {
+      this.$store.commit('updataEmail', e.target.value)
+    },
+    updataNumber(e) {
+      this.$store.commit('updataNumber', e.target.value)
+    },
     login() {
       if(this.user == ''){
         console.log('请输入手机号码');
@@ -40,6 +69,9 @@ export default {
         console.log('手机号码不正确');
         return false;
       }
+      this.$store.state.isLogin = true;
+      sessionStorage.login = true;
+      this.$router.push({ name:'Home' })
       console.log('登录')
     },
     isPhoneNumFn() {
