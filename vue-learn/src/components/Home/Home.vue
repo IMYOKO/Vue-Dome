@@ -1,6 +1,12 @@
 <template>
   <div id="home">
     <!-- 立即购买 -->
+    <p>{{homedata}}</p>
+    <p v-html="homedata"></p>
+
+    <input type="text" v-model="name" placeholder="输入姓名">
+    <input type="password" v-model="password" placeholder="输入密码">
+    <button @click="sumbit">提交</button>
     <!--购买-->
     <div class="buy-wrapper">
       <div class="midder-wrapper">
@@ -16,13 +22,17 @@ import store from "@/vuex/store"
 export default {
   data() {
     return {
-      isLogin: null
+      isLogin: null,
+      homedata: '',
+      name: '',
+      password: ''
     }
   },
   created () {
     this.isLogin = this.$store.state.isLogin;
   },
   mounted () {
+    this.getHome();
     console.log(this.isLogin);
     // this.isLogin = this.$store.state.isLogin;
     console.log(this.isLogin);
@@ -33,6 +43,20 @@ export default {
     }
   },
   methods: {
+    async getHome () {
+      let res = await this.$axios.get('/api')
+      this.homedata = res.data;
+      console.log(res)
+    },
+    async sumbit() {
+      let data = {
+        name: this.name,
+        password: this.password
+      }
+      console.log(data);
+      let res = await this.$axios.post('/api/register', data)
+      console.log(res)
+    },
     buy() {
       this.isLogin = this.$store.state.isLogin;
       if(this.isLogin){
