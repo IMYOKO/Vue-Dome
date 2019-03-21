@@ -9,7 +9,7 @@ import other from '@/components/other/other'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
   routes: [
     { path: '/', name: 'Home', component: Home },
     { path: '/Login', name: 'Login', component: Login },
